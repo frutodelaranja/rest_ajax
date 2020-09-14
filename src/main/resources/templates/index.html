@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="h-100" lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Admin panel</title>
+
+</head>
+<body class="h-100">
+<div class="container-fluid">
+    <div class="row bg-dark text-white p-2">
+        <div class="col-md-3">
+            <a id="infoLogin" class="font-weight-bold" >LOGIN</a>
+            <a th:text="${' with roles: '}"></a>
+            <a id="infoRole" class="text-success" >ROLE</a>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-7"></div>
+        <div class="col-md-1 "><a class="text-secondary float-right" href="/logout">Logout</a></div>
+    </div>
+</div>
+<div class="container-fluid h-100">
+    <div class="row h-100">
+        <div class="col-2 nav flex-column nav-pills" style="padding: 0" id="usersConsole" role="tablist" aria-orientation="vertical">
+            <p></p>
+            <a id="adm" class="nav-link active mt-3" data-toggle="pill" href="#adminPage" role="tab"
+               aria-controls="adminPage" aria-selected="true">Admin</a>
+            <a id="usr" class="nav-link" data-toggle="pill" href="#userPage" role="tab"
+               aria-controls="userPage" aria-selected="false">User</a>
+        </div>
+        <div class="col-md-10 h-100 bg-light">
+            <div class="tab-content">
+                <div id="userPage" class="tab-pane fade" role="tabpanel" aria-labelledby="userPage">
+                    <br>
+                    <h2>User information-page</h2>
+                    <div class="card">
+                        <div class="card-header">About user</div>
+                        <div class="card-body">
+                            <form>
+                                <table class="table table-striped" id="userTable">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Login</th>
+                                        <th scope="col">Password</th>
+                                        <th scope="col">User</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="user">
+
+                                    </tbody>
+                                </table>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="adminPage" class="tab-pane fade show active" role="tabpanel" aria-labelledby="admin">
+                    <br>
+                    <h2>Admin panel</h2>
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a id="listTab" class="nav-link active" href="#list" data-toggle="tab" role="tab">Users table</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="addTab" class="nav-link" href="#addUser" data-toggle="tab" role="tab">New User</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="card tab-pane fade active show" id="list" role="tabpanel">
+                            <div class="card-header">All users</div>
+                            <div class="card-body">
+                                <form>
+                                    <table class="table table-striped" id="myTableId">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Login</th>
+                                            <th scope="col">Password</th>
+                                            <th scope="col">User</th>
+                                            <th scope="col">Edit</th>
+                                            <th scope="col">Delete</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="users">
+
+                                        </tbody>
+                                    </table>
+                                </form>
+
+                            </div>
+
+                        </div>
+                        <div id="addUser" class="card tab-pane fade" role="tabpanel">
+                            <div class="card-header">Add new user</div>
+                            <div class="card-body">
+                                <form id="addForm" class="text-center m-auto w-25">
+                                    <div class="form-group">
+                                        <label for="FirstName"><a class="font-weight-bold">First
+                                            name</a></label>
+                                        <input type="text"
+                                               class="form-control form-control-sm  alert-warning"
+                                               id="FirstName" name="name" placeholder="Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Email"><a
+                                                class="font-weight-bold ">Email</a></label>
+                                        <input type="email" class="form-control  form-control-sm alert-warning"
+                                               id="Email" name="username"
+                                               aria-describedby="emailHelp" placeholder="email">
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label for="Password"><a
+                                                class="font-weight-bold">Password</a></label>
+                                        <input type="password" class="form-control form-control-sm"
+                                               id="Password" name="password"
+                                               placeholder="Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="RoleUser"><a
+                                                class="font-weight-bold">Role</a></label>
+                                        <select class="custom-select" size="2"
+                                                id="RoleUser" name="roles"
+                                                multiple>
+                                            <option value="ROLE_ADMIN">ADMIN</option>
+                                            <option value="ROLE_USER" selected>USER</option>
+                                        </select>
+                                    </div>
+                                    <button id="addButton" type="submit" class="btn btn-success btn-lg">Add new user
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="editLabel" aria-hidden="true" id="modal">
+    <div class="modal-dialog" role="document">
+        <form id="mdForm" action="" class="modalForm" name="modalo">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editLabel">user</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="form-group row justify-content-center">
+                        <div class="col-5">
+                            <strong><label for="userId">ID</label></strong>
+                            <input id="userId" name="id" class="form-control form-control-sm"
+                                   type="text" value="" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <div class="col-5">
+                            <strong><label for="nameEdit">First name</label></strong>
+                            <input id="nameEdit" name="name"
+                                   class="form-control form-control-sm" type="text" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <div class="col-5">
+                            <strong><label for="emailEdit">Email</label></strong>
+                            <input id="emailEdit" name="username"
+                                   class="form-control form-control-sm" type="text" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <div class="col-5">
+                            <strong><label for="passEdit">Password</label></strong>
+                            <input id="passEdit" name="password"
+                                   class="form-control form-control-sm" type="password" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <div class="col-5">
+                            <strong><label for="roleEdit">Role</label></strong>
+                            <select id="roleEdit" name="roles" class="custom-select" multiple size="2">
+                                <option value="ROLE_ADMIN">ADMIN</option>
+                                <option value="ROLE_USER" selected>USER</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary"
+                            data-dismiss="modal">Close
+                    </button>
+                    <button id="modalButton" type="submit">
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+<script src="script.js"></script>
+</html>
