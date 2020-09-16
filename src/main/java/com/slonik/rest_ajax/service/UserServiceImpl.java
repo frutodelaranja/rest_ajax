@@ -73,7 +73,9 @@ public class UserServiceImpl implements UserService {
         Set<Role> editRoles = new HashSet<>();
         editUser.setName(user.getName());
         editUser.setUsername(user.getUsername());
-        editUser.setPassword(user.getPassword());
+        if (!editUser.getPassword().equals(user.getPassword())) {
+            editUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         if (user.getRoles().isEmpty()) {
             editRoles.add(new Role(2L));
         }else {

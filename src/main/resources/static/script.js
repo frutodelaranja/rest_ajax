@@ -1,4 +1,3 @@
-// const getUsersButton = document.querySelector("#loadUsers");
 
 function listUsers() {
     $.ajax({
@@ -29,7 +28,7 @@ function listUsers() {
     });
 }
 
-$(document).ready(function (){
+$(document).ready(function authorizedUser(){
 
     $.ajax({
         url: '/user',
@@ -59,13 +58,9 @@ $(document).ready(function (){
             }
         }
     });
-
-
-
 });
 $(document).on('click', '#usr', function (event){
     event.preventDefault();
-    // $('#user').empty();
     $('#user').empty().append(
         `<tr id='${currentUser.id}'>
                             <td>${currentUser.id}</td>
@@ -77,7 +72,7 @@ $(document).on('click', '#usr', function (event){
                      </tr>`
     );
 });
-$(document).ready(function addUser() {
+$(function addUser() {
     $('#addForm').submit(function (e) {
         e.preventDefault();
         let user = {};
@@ -108,7 +103,6 @@ $(document).ready(function addUser() {
                 $('#users').empty();
                 listUsers();
                 $('#addForm')[0].reset();
-
             }
         });
         $('#listTab').click();
@@ -174,32 +168,12 @@ $(function () {
             type: "PUT",
             data: JSON.stringify(user),
             success: function () {
-                let roles = user.roles.length > 1 ? user.roles[0].name + ", " + user.roles[1].name : user.roles[0].name;
                 $('#edit')[0].reset();
                 $(".modal").modal("hide");
-                // $('#myTableId tbody').empty();
                 $('#users').empty();
                 listUsers();
-
-                // $(`#${user.id}`).html(
-                //     `
-                //     <tr id='${user.id}'>
-                //     <td>${user.id}</td>
-                //     <td>${user.name}</td>
-                //     <td>${user.username}</td>
-                //     <td>${user.password}</td>
-                //     <td>${roles}</td>
-                //     <td>
-                //         <button id="editUser" editID="${user.id}" type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal">Edit</button>
-                //     </td>
-                //     <td>
-                //         <button id="deleteUser" deleteID="${user.id}" type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal">Delete</button>
-                //     </td>
-                //     </tr>`
-                // );
             }
         });
-
     });
 });
 $(document).on('click', '#deleteUser', function (e) {
