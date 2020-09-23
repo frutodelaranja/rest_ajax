@@ -25,19 +25,17 @@ public class AdminController {
     }
 
     @PostMapping("/admin/saveUser")
-    public ResponseEntity<Void> saveUser(HttpEntity<User> httpEntity) {
-        User user = httpEntity.getBody();
-        userService.save(user);
+    public ResponseEntity<Void> saveUser(@RequestBody User saveUser) {
+        userService.save(saveUser);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/admin/edit")
-    public ResponseEntity<Void> updateUser(HttpEntity<User> httpEntity){
-        System.out.println(httpEntity.getBody());
-        User user = httpEntity.getBody();
-        userService.edit(user);
+    public ResponseEntity<Void> updateUser(@RequestBody User editUser){
+        userService.edit(editUser);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @DeleteMapping("/admin/delete/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable long id) {
         userService.delete(id);
